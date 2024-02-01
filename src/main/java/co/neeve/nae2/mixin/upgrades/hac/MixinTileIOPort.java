@@ -22,13 +22,11 @@ public class MixinTileIOPort implements INAEUpgradeHost {
 	@Final
 	private UpgradeInventory upgrades;
 
-	@Inject(method = "tickingRequest", at = @At(
+	@Inject(method = "doWork", at = @At(
 		value = "INVOKE",
 		target = "Lappeng/tile/storage/TileIOPort;getInstalledUpgrades(Lappeng/api/config/Upgrades;)I"
 	))
-	private void injectTickingRequest(IGridNode node, int ticksSinceLastCall,
-	                                  CallbackInfoReturnable<TickRateModulation> cir,
-	                                  @Local LocalLongRef itemsToSend) {
+	private void injectDoWork(final CallbackInfoReturnable<TickRateModulation> cir, @Local LocalLongRef itemsToSend) {
 		var hyper =
 			this.getInstalledUpgrades(co.neeve.nae2.common.registration.definitions.Upgrades.UpgradeType.HYPER_ACCELERATION);
 

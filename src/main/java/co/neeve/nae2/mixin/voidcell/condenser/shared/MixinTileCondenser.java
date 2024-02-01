@@ -51,12 +51,12 @@ public abstract class MixinTileCondenser extends AEBaseInvTile implements IExten
 		return this.nae2$voidCell;
 	}
 
-	@Inject(method = "writeToNBT", at = @At("RETURN"))
+	@Inject(method = "writeToNBT", at = @At("RETURN"), remap = true)
 	public void writeToNBT(NBTTagCompound data, CallbackInfoReturnable<NBTTagCompound> cir) {
 		this.nae2$voidCell.writeToNBT(data, "voidCellInv");
 	}
 
-	@Inject(method = "readFromNBT", at = @At("RETURN"))
+	@Inject(method = "readFromNBT", at = @At("RETURN"), remap = true)
 	public void readFromNBT(NBTTagCompound data, CallbackInfo ci) {
 		this.nae2$voidCell.readFromNBT(data, "voidCellInv");
 	}

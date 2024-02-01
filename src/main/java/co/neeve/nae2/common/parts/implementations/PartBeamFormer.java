@@ -247,7 +247,7 @@ public class PartBeamFormer extends NAEBasePartState implements IBlockStateListe
 		var newBeamA = 0;
 		var newBeamB = 0;
 
-		if (breakPos != null) {
+		if (breakPos != null && this.listenerLinkedList != null) {
 			var iterator = this.listenerLinkedList.long2ObjectEntrySet().fastIterator();
 			var hash = breakPos.toLong();
 			while (iterator.hasNext()) {
