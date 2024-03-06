@@ -2,6 +2,7 @@ package co.neeve.nae2.common.parts.implementations;
 
 import appeng.api.AEApi;
 import appeng.api.exceptions.FailedConnectionException;
+import appeng.api.exceptions.SecurityConnectionException;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridConnection;
 import appeng.api.networking.IGridNode;
@@ -18,9 +19,12 @@ import appeng.api.util.AECableType;
 import appeng.api.util.AEColor;
 import appeng.api.util.AEPartLocation;
 import appeng.core.AELog;
+import appeng.hooks.TickHandler;
 import appeng.items.parts.PartModels;
 import appeng.me.GridAccessException;
+import appeng.me.GridNode;
 import appeng.parts.PartModel;
+import appeng.util.IWorldCallable;
 import appeng.util.Platform;
 import co.neeve.nae2.Tags;
 import co.neeve.nae2.client.rendering.helpers.BeamFormerRenderHelper;
@@ -390,7 +394,13 @@ public class PartBeamFormer extends NAEBasePartState implements IBlockStateListe
 						try {
 							this.connect(potentialFormer, blockSet);
 							return TickRateModulation.SLEEP;
-
+						} catch (final SecurityConnectionException e) {
+							// See https://github.com/AE2-UEL/NAE2/issues/47.
+							TickHandler.INSTANCE.addCallable(node.getWorld(), _world -> {
+								node.getMachine().securityBreak();
+								return null;
+							});
+							return TickRateModulation.SLEEP;
 						} catch (final FailedConnectionException | NullPointerException e) {
 							// We tried. We found the beam former, but couldn't establish the connection.
 							// If the former isn't ready yet, wait until it's ready, and it will try connecting
