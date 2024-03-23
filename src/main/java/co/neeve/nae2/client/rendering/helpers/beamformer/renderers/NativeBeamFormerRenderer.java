@@ -23,6 +23,9 @@ public class NativeBeamFormerRenderer implements IBeamFormerRenderer {
 
 	@Override
 	public void renderDynamic(IBeamFormer partBeamFormer, double x, double y, double z, float partialTicks) {
+		if (partBeamFormer.getBeamLength() <= 0) {
+			return;
+		}
 		var metadata = getBloomMetadata(partBeamFormer);
 		var rgb = getColor(partBeamFormer);
 
