@@ -22,9 +22,7 @@ import appeng.core.AELog;
 import appeng.hooks.TickHandler;
 import appeng.items.parts.PartModels;
 import appeng.me.GridAccessException;
-import appeng.me.GridNode;
 import appeng.parts.PartModel;
-import appeng.util.IWorldCallable;
 import appeng.util.Platform;
 import co.neeve.nae2.Tags;
 import co.neeve.nae2.client.rendering.helpers.BeamFormerRenderHelper;
@@ -102,6 +100,11 @@ public class PartBeamFormer extends NAEBasePartState implements IBlockStateListe
 		return !newState.getMaterial().isOpaque() || newState.getBlock().getLightOpacity(newState) != 255;
 	}
 
+	@SideOnly(Side.CLIENT)
+	private static World getClientWorld() {
+		return Minecraft.getMinecraft().world;
+	}
+
 	@Override
 	public AEColor getColor() {
 		return this.getHost().getColor();
@@ -123,7 +126,8 @@ public class PartBeamFormer extends NAEBasePartState implements IBlockStateListe
 
 	@Override
 	public boolean isValid() {
-		return !this.getTile().isInvalid() && this.getHost().getPart(this.getSide()) == this;
+		var tile = this.getTile();
+		return tile.getWorld() == getClientWorld() && !tile.isInvalid() && this.getHost().getPart(this.getSide()) == this;
 	}
 
 	@Override
