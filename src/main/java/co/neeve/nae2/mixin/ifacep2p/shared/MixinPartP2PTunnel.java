@@ -21,8 +21,7 @@ public class MixinPartP2PTunnel {
 
 			var iface = definitions.blocks().iface().maybeStack(1);
 			var ifacePart = definitions.parts().iface().maybeStack(1);
-
-            if ((iface.isPresent() && hand.isItemEqual(iface.get())) 
+			if ((iface.isPresent() && hand.isItemEqual(iface.get())) 
 					|| (ifacePart.isPresent() && hand.isItemEqual(ifacePart.get()))) {
 				return NAE2.definitions().parts().p2pTunnelInterface().maybeStack(1).orElse(ItemStack.EMPTY);
 			}

@@ -1,6 +1,5 @@
 package co.neeve.nae2.mixin.upgrades.hac;
 
-import appeng.api.networking.IGridNode;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.parts.automation.UpgradeInventory;
 import appeng.tile.storage.TileIOPort;
@@ -26,7 +25,8 @@ public class MixinTileIOPort implements INAEUpgradeHost {
 		value = "INVOKE",
 		target = "Lappeng/tile/storage/TileIOPort;getInstalledUpgrades(Lappeng/api/config/Upgrades;)I"
 	))
-	private void injectDoWork(final CallbackInfoReturnable<TickRateModulation> cir, @Local LocalLongRef itemsToSend) {
+	private void injectTickingRequest(CallbackInfoReturnable<TickRateModulation> cir,
+	                                  @Local LocalLongRef itemsToSend) {
 		var hyper =
 			this.getInstalledUpgrades(co.neeve.nae2.common.registration.definitions.Upgrades.UpgradeType.HYPER_ACCELERATION);
 

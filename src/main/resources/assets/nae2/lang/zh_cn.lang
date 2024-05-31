@@ -35,6 +35,8 @@ item.nae2.part.beam_former.name=ME光束成型器
 
 # Upgrades
 item.nae2.upgrade.hyper_acceleration.name=超速卡
+item.nae2.upgrade.auto_complete.name=工作自动完成卡
+item.nae2.upgrade.auto_complete.desc=自动完成作业，无需等待输出。
 
 # Tiles
 tile.nae2.reconstruction_chamber.name=原子再构室
@@ -67,6 +69,12 @@ nae2.storage_cell_void.count=已存储%s %s能量。
 # JEI Ctrl-Craft GUI
 nae2.jei.missing.craft.1=[NAE2] 所有缺失物品均可合成。
 nae2.jei.missing.craft.2=按住 Ctrl 来批量请求合成。
+
+nae2.jei.missing.partialcraft.1=[NAE2] Some items found craftable.
+nae2.jei.missing.partialcraft.2=Hold Ctrl to bypass and mass-order missing items.
+
+nae2.jei.missing.bypasscraft.1=[NAE2] No items found craftable.
+nae2.jei.missing.bypasscraft.2=Hold Ctrl to bypass and fill the grid as much as possible.
 
 nae2.jei.cellview.items=物品
 nae2.jei.cellview.buckets=桶

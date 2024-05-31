@@ -100,11 +100,6 @@ public class PartBeamFormer extends NAEBasePartState implements IBlockStateListe
 		return !newState.getMaterial().isOpaque() || newState.getBlock().getLightOpacity(newState) != 255;
 	}
 
-	@SideOnly(Side.CLIENT)
-	private static World getClientWorld() {
-		return Minecraft.getMinecraft().world;
-	}
-
 	@Override
 	public AEColor getColor() {
 		return this.getHost().getColor();
@@ -127,7 +122,7 @@ public class PartBeamFormer extends NAEBasePartState implements IBlockStateListe
 	@Override
 	public boolean isValid() {
 		var tile = this.getTile();
-		return tile.getWorld() == getClientWorld() && !tile.isInvalid() && this.getHost().getPart(this.getSide()) == this;
+		return tile.getWorld() == Minecraft.getMinecraft().world && !tile.isInvalid() && this.getHost().getPart(this.getSide()) == this;
 	}
 
 	@Override
